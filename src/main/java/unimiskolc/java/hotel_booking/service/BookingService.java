@@ -3,6 +3,7 @@ package unimiskolc.java.hotel_booking.service;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import unimiskolc.java.hotel_booking.exception.GuestNotFoundException;
 import unimiskolc.java.hotel_booking.model.Booking;
 import unimiskolc.java.hotel_booking.model.Guest;
 import unimiskolc.java.hotel_booking.model.HotelService;
@@ -52,7 +53,7 @@ public class BookingService {
 
     private void validateBooking(Booking booking) {
         Guest guest = guestRepository.findById(booking.getGuest().getId())
-                .orElseThrow(() -> new IllegalArgumentException("Guest not found with ID: " + booking.getGuest().getId()));
+                .orElseThrow(() -> new GuestNotFoundException("Guest not found with ID: " + booking.getGuest().getId()));
         booking.setGuest(guest);
 
         Room room = roomRepository.findById(booking.getRoom().getId())

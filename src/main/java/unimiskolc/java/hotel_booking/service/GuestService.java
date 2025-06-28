@@ -29,7 +29,7 @@ public class GuestService {
             throw new IllegalArgumentException("Guest ID cannot be null for update");
         }
         if (!guestRepository.existsById(guest.getId())) {
-            throw new IllegalArgumentException("Guest not found with ID: " + guest.getId());
+            throw new GuestNotFoundException("Guest not found with ID: " + guest.getId());
         }
         guestRepository.save(guest);
     }

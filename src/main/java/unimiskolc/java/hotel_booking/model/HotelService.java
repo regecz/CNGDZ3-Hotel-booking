@@ -9,7 +9,6 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "services")
-@ToString(exclude = "bookings")
 public class HotelService {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,5 +18,6 @@ public class HotelService {
     private double price;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Booking> bookings;
 }
